@@ -64,6 +64,7 @@
             // 
             // mainList
             // 
+            mainList.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             mainList.AutoScroll = true;
             mainList.Controls.Add(modOrder0);
             mainList.Font = new Font("Bender", 13F, FontStyle.Bold);
