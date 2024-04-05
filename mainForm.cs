@@ -89,6 +89,8 @@ namespace LOE_Overhaul
                 mainList.Location = new Point(0, 0);
                 mainList.Size = new Size(mainList.Size.Width + 310, mainList.Size.Height);
 
+                mainList.AutoScrollMinSize = new Size(mainList.Size.Width, 664);
+
                 refreshUI();
                 uselessFunction();
 
