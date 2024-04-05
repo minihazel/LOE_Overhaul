@@ -67,7 +67,7 @@
             mainList.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             mainList.AutoScroll = true;
             mainList.Controls.Add(modOrder0);
-            mainList.Font = new Font("Bender", 13F, FontStyle.Bold);
+            mainList.Font = new Font("Bahnschrift Light", 12F);
             mainList.Location = new Point(265, 0);
             mainList.Margin = new Padding(4, 3, 4, 3);
             mainList.Name = "mainList";
@@ -100,6 +100,7 @@
             panelSidebar.Controls.Add(pnlModAuthor);
             panelSidebar.Controls.Add(pnlModVersion);
             panelSidebar.Controls.Add(pnlModName);
+            panelSidebar.Font = new Font("Bahnschrift Light", 12F);
             panelSidebar.Location = new Point(0, 0);
             panelSidebar.Name = "panelSidebar";
             panelSidebar.Size = new Size(266, 664);
@@ -110,7 +111,7 @@
             grLinks.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             grLinks.Controls.Add(readFAQ);
             grLinks.Controls.Add(joinLink);
-            grLinks.Font = new Font("Bender", 11F);
+            grLinks.Font = new Font("Bahnschrift Light", 11F);
             grLinks.ForeColor = Color.LightGray;
             grLinks.Location = new Point(6, 556);
             grLinks.Name = "grLinks";
@@ -123,7 +124,7 @@
             // 
             readFAQ.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             readFAQ.Cursor = Cursors.Hand;
-            readFAQ.Font = new Font("Bender", 11F, FontStyle.Bold);
+            readFAQ.Font = new Font("Bahnschrift", 11F, FontStyle.Bold);
             readFAQ.ForeColor = Color.DimGray;
             readFAQ.Location = new Point(3, 22);
             readFAQ.Margin = new Padding(0);
@@ -141,7 +142,7 @@
             // 
             joinLink.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             joinLink.Cursor = Cursors.Hand;
-            joinLink.Font = new Font("Bender", 11F, FontStyle.Bold);
+            joinLink.Font = new Font("Bahnschrift", 11F, FontStyle.Bold);
             joinLink.ForeColor = Color.DimGray;
             joinLink.Location = new Point(3, 56);
             joinLink.Margin = new Padding(0);
@@ -160,7 +161,7 @@
             btnDown.BackColor = Color.FromArgb(34, 36, 38);
             btnDown.FlatAppearance.BorderColor = SystemColors.WindowFrame;
             btnDown.FlatStyle = FlatStyle.Flat;
-            btnDown.Font = new Font("Bender", 30F);
+            btnDown.Font = new Font("Bahnschrift Light", 30F);
             btnDown.Location = new Point(6, 469);
             btnDown.Name = "btnDown";
             btnDown.Size = new Size(251, 65);
@@ -174,7 +175,7 @@
             btnUp.BackColor = Color.FromArgb(34, 36, 38);
             btnUp.FlatAppearance.BorderColor = SystemColors.WindowFrame;
             btnUp.FlatStyle = FlatStyle.Flat;
-            btnUp.Font = new Font("Bender", 30F);
+            btnUp.Font = new Font("Bahnschrift Light", 30F);
             btnUp.Location = new Point(6, 389);
             btnUp.Name = "btnUp";
             btnUp.Size = new Size(251, 65);
@@ -194,7 +195,7 @@
             // 
             // titleModAkiVersion
             // 
-            titleModAkiVersion.Font = new Font("Bender", 9F);
+            titleModAkiVersion.Font = new Font("Bahnschrift Light", 9F);
             titleModAkiVersion.Location = new Point(3, 3);
             titleModAkiVersion.Name = "titleModAkiVersion";
             titleModAkiVersion.Size = new Size(251, 20);
@@ -207,12 +208,12 @@
             textModAkiVersion.BackColor = Color.FromArgb(28, 30, 32);
             textModAkiVersion.BorderStyle = BorderStyle.FixedSingle;
             textModAkiVersion.Enabled = false;
-            textModAkiVersion.Font = new Font("Bender", 13F, FontStyle.Bold);
+            textModAkiVersion.Font = new Font("Bahnschrift Light", 13F);
             textModAkiVersion.ForeColor = Color.LightGray;
             textModAkiVersion.Location = new Point(3, 35);
             textModAkiVersion.Name = "textModAkiVersion";
             textModAkiVersion.ReadOnly = true;
-            textModAkiVersion.Size = new Size(251, 27);
+            textModAkiVersion.Size = new Size(251, 28);
             textModAkiVersion.TabIndex = 1;
             textModAkiVersion.Text = "Placeholder";
             // 
@@ -227,7 +228,7 @@
             // 
             // titleModHasConfig
             // 
-            titleModHasConfig.Font = new Font("Bender", 9F);
+            titleModHasConfig.Font = new Font("Bahnschrift Light", 9F);
             titleModHasConfig.Location = new Point(3, 3);
             titleModHasConfig.Name = "titleModHasConfig";
             titleModHasConfig.Size = new Size(251, 20);
@@ -240,12 +241,12 @@
             textModHasConfig.BackColor = Color.FromArgb(28, 30, 32);
             textModHasConfig.BorderStyle = BorderStyle.FixedSingle;
             textModHasConfig.Enabled = false;
-            textModHasConfig.Font = new Font("Bender", 13F, FontStyle.Bold);
+            textModHasConfig.Font = new Font("Bahnschrift Light", 13F);
             textModHasConfig.ForeColor = Color.LightGray;
             textModHasConfig.Location = new Point(3, 35);
             textModHasConfig.Name = "textModHasConfig";
             textModHasConfig.ReadOnly = true;
-            textModHasConfig.Size = new Size(251, 27);
+            textModHasConfig.Size = new Size(251, 28);
             textModHasConfig.TabIndex = 1;
             textModHasConfig.Text = "Placeholder";
             // 
@@ -260,7 +261,7 @@
             // 
             // titleModAuthor
             // 
-            titleModAuthor.Font = new Font("Bender", 9F);
+            titleModAuthor.Font = new Font("Bahnschrift Light", 9F);
             titleModAuthor.Location = new Point(3, 3);
             titleModAuthor.Name = "titleModAuthor";
             titleModAuthor.Size = new Size(251, 20);
@@ -273,12 +274,12 @@
             textModAuthor.BackColor = Color.FromArgb(28, 30, 32);
             textModAuthor.BorderStyle = BorderStyle.FixedSingle;
             textModAuthor.Enabled = false;
-            textModAuthor.Font = new Font("Bender", 13F, FontStyle.Bold);
+            textModAuthor.Font = new Font("Bahnschrift Light", 13F);
             textModAuthor.ForeColor = Color.LightGray;
             textModAuthor.Location = new Point(3, 35);
             textModAuthor.Name = "textModAuthor";
             textModAuthor.ReadOnly = true;
-            textModAuthor.Size = new Size(251, 27);
+            textModAuthor.Size = new Size(251, 28);
             textModAuthor.TabIndex = 1;
             textModAuthor.Text = "Placeholder";
             // 
@@ -293,7 +294,7 @@
             // 
             // titleModVersion
             // 
-            titleModVersion.Font = new Font("Bender", 9F);
+            titleModVersion.Font = new Font("Bahnschrift Light", 9F);
             titleModVersion.Location = new Point(3, 3);
             titleModVersion.Name = "titleModVersion";
             titleModVersion.Size = new Size(251, 20);
@@ -306,12 +307,12 @@
             textModVersion.BackColor = Color.FromArgb(28, 30, 32);
             textModVersion.BorderStyle = BorderStyle.FixedSingle;
             textModVersion.Enabled = false;
-            textModVersion.Font = new Font("Bender", 13F, FontStyle.Bold);
+            textModVersion.Font = new Font("Bahnschrift Light", 13F);
             textModVersion.ForeColor = Color.LightGray;
             textModVersion.Location = new Point(3, 35);
             textModVersion.Name = "textModVersion";
             textModVersion.ReadOnly = true;
-            textModVersion.Size = new Size(251, 27);
+            textModVersion.Size = new Size(251, 28);
             textModVersion.TabIndex = 1;
             textModVersion.Text = "Placeholder";
             // 
@@ -326,7 +327,7 @@
             // 
             // titleModName
             // 
-            titleModName.Font = new Font("Bender", 9F);
+            titleModName.Font = new Font("Bahnschrift Light", 9F);
             titleModName.Location = new Point(3, 3);
             titleModName.Name = "titleModName";
             titleModName.Size = new Size(251, 20);
@@ -339,12 +340,12 @@
             textModName.BackColor = Color.FromArgb(28, 30, 32);
             textModName.BorderStyle = BorderStyle.FixedSingle;
             textModName.Enabled = false;
-            textModName.Font = new Font("Bender", 13F, FontStyle.Bold);
+            textModName.Font = new Font("Bahnschrift Light", 13F);
             textModName.ForeColor = Color.LightGray;
             textModName.Location = new Point(3, 35);
             textModName.Name = "textModName";
             textModName.ReadOnly = true;
-            textModName.Size = new Size(251, 27);
+            textModName.Size = new Size(251, 28);
             textModName.TabIndex = 1;
             textModName.Text = "Placeholder";
             // 

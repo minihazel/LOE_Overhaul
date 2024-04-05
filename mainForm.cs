@@ -146,7 +146,7 @@ namespace LOE_Overhaul
             sidebarLbl.TextAlign = modOrder0.TextAlign;
             sidebarLbl.Size = new Size(mainList.Size.Width, modOrder0.Size.Height);
             sidebarLbl.Location = new Point(1, 1);
-            sidebarLbl.Font = new Font("Bender", 10, FontStyle.Bold);
+            sidebarLbl.Font = new Font("Bahnschrift Light", 10, FontStyle.Bold);
             sidebarLbl.BackColor = idleColor;
             sidebarLbl.ForeColor = Color.LightGray;
             sidebarLbl.Padding = new Padding(10, 0, 0, 0);
@@ -172,7 +172,7 @@ namespace LOE_Overhaul
                     lbl.TextAlign = modOrder0.TextAlign;
                     lbl.Size = new Size(mainList.Size.Width, modOrder0.Size.Height);
                     lbl.Location = new Point(1, sidebarLbl.Location.Y + modOrder0.Size.Height + (i * modOrder0.Size.Height));
-                    lbl.Font = new Font("Bender", 13, FontStyle.Bold);
+                    lbl.Font = new Font("Bahnschrift Light", 13, FontStyle.Bold);
                     lbl.BackColor = idleColor;
                     lbl.ForeColor = Color.LightGray;
                     lbl.Padding = new Padding(10, 0, 0, 0);
