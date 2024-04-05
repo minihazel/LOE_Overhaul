@@ -7,7 +7,7 @@ namespace LOE_Overhaul
 {
     public partial class mainForm : Form
     {
-        public string? currentEnv = Path.Combine(Environment.CurrentDirectory);
+        public string? currentEnv = Path.GetDirectoryName(Application.ExecutablePath);
         public string? cacheFolder;
         public string? serverFolder;
         public string? orderFile;
