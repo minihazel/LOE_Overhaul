@@ -7,7 +7,8 @@ namespace LOE_Overhaul
 {
     public partial class mainForm : Form
     {
-        public string? currentEnv = Path.GetDirectoryName(Application.ExecutablePath);
+        // public string? currentEnv = Path.GetDirectoryName(Application.ExecutablePath);
+        public string? currentEnv = Path.Combine("C:\\SPT-AKI 3.8.0", "user", "mods");
         public string? cacheFolder;
         public string? serverFolder;
         public string? orderFile;
@@ -85,10 +86,6 @@ namespace LOE_Overhaul
             bool serverFolderExists = Directory.Exists(serverFolder);
             if (serverFolderExists)
             {
-                panelSidebar.Location = new Point(-266, 0);
-                mainList.Location = new Point(0, 0);
-                mainList.Size = new Size(mainList.Size.Width + 310, mainList.Size.Height);
-
                 refreshUI();
                 uselessFunction();
 
@@ -132,33 +129,6 @@ namespace LOE_Overhaul
 
         private void listMods()
         {
-            Label sidebarLbl = new Label();
-
-            sidebarLbl.Name = $"open_sidebar";
-            if (!isSidebarOpen)
-                sidebarLbl.Text = $"📂 Open sidebar";
-            else
-                sidebarLbl.Text = $"🗂 Close sidebar";
-
-            sidebarLbl.AutoSize = false;
-            sidebarLbl.AutoEllipsis = true;
-            sidebarLbl.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
-            sidebarLbl.TextAlign = modOrder0.TextAlign;
-            sidebarLbl.Size = new Size(mainList.Size.Width, modOrder0.Size.Height);
-            sidebarLbl.Location = new Point(1, 1);
-            sidebarLbl.Font = new Font("Bahnschrift Light", 10, FontStyle.Bold);
-            sidebarLbl.BackColor = idleColor;
-            sidebarLbl.ForeColor = Color.LightGray;
-            sidebarLbl.Padding = new Padding(10, 0, 0, 0);
-            sidebarLbl.Cursor = Cursors.Hand;
-            sidebarLbl.AutoEllipsis = true;
-            sidebarLbl.MouseEnter += new EventHandler(lbl_MouseEnter);
-            sidebarLbl.MouseLeave += new EventHandler(lbl_MouseLeave);
-            sidebarLbl.MouseDown += new MouseEventHandler(lbl_MouseDown);
-            sidebarLbl.MouseUp += new MouseEventHandler(lbl_MouseUp);
-            sidebarLbl.MouseDoubleClick += new MouseEventHandler(lbl_MouseDoubleClick);
-            mainList.Controls.Add(sidebarLbl);
-
             try
             {
                 for (int i = 0; i < mainOrder.Length; i++)
@@ -171,8 +141,8 @@ namespace LOE_Overhaul
                     lbl.Anchor = (AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right);
                     lbl.TextAlign = modOrder0.TextAlign;
                     lbl.Size = new Size(mainList.Size.Width, modOrder0.Size.Height);
-                    lbl.Location = new Point(1, sidebarLbl.Location.Y + modOrder0.Size.Height + (i * modOrder0.Size.Height));
-                    lbl.Font = new Font("Bahnschrift Light", 13, FontStyle.Bold);
+                    lbl.Location = new Point(1, 10 /* + modOrder0.Size.Height */ + (i * modOrder0.Size.Height));
+                    lbl.Font = new Font("Bahnschrift Light", modOrder0.Font.Size, FontStyle.Regular);
                     lbl.BackColor = idleColor;
                     lbl.ForeColor = Color.LightGray;
                     lbl.Padding = new Padding(10, 0, 0, 0);
@@ -203,6 +173,8 @@ namespace LOE_Overhaul
                     label.BackColor = hoverColor;
                 else if (label.BackColor == selectColor)
                     label.BackColor = selectColor;
+
+                displayModInfo(label.Text, true, label);
             }
         }
 
@@ -228,7 +200,7 @@ namespace LOE_Overhaul
                 {
                     if (component is Label)
                     {
-                        if (component.Text != lbl.Text && lbl.Name.ToLower() != "open_sidebar")
+                        if (component.Text != lbl.Text && lbl.Name.ToLower() != "fontsize")
                         {
                             component.BackColor = idleColor;
                             component.ForeColor = Color.LightGray;
@@ -237,55 +209,11 @@ namespace LOE_Overhaul
                     }
                 }
 
-                if (lbl.Name.ToLower() != "open_sidebar")
+                if (lbl.Name.ToLower() != "fontsize")
                 {
                     lbl.ForeColor = Color.DodgerBlue;
                     lbl.Padding = new Padding(15, 0, 0, 0);
-
-                    tmr = new System.Windows.Forms.Timer();
-                    tmr.Interval = interval;
-                    tmr.Tick += (sender, e) =>
-                    {
-                        startMoving();
-                        tmr.Stop();
-                        tmr.Dispose();
-                    };
-                    tmr.Start();
-                }
-                else
-                {
-                    if (lbl.Text.ToLower() == "🗂 close sidebar")
-                    {
-                        // closing sidebar
-                        panelSidebar.Location = new Point(-266, 0);
-                        mainList.Location = new Point(0, 0);
-                        mainList.Size = new Size(this.Size.Width, mainList.Size.Height);
-
-                        lbl.Text = "📂 Open sidebar";
-                        isSidebarOpen = false;
-
-                        foreach (Control component in mainList.Controls)
-                        {
-                            if (component is Label)
-                                component.Size = new Size(mainList.Size.Width, component.Size.Height);
-                        }
-                    }
-                    else if (lbl.Text.ToLower() == "📂 open sidebar")
-                    {
-                        // opening sidebar
-                        panelSidebar.Location = new Point(0, 0);
-                        mainList.Location = new Point(266, 0);
-                        mainList.Size = new Size(310, mainList.Size.Height);
-
-                        lbl.Text = "🗂 Close sidebar";
-                        isSidebarOpen = true;
-
-                        foreach (Control component in mainList.Controls)
-                        {
-                            if (component is Label)
-                                component.Size = new Size(mainList.Size.Width, component.Size.Height);
-                        }
-                    }
+                    lbl.Select();
                 }
             }
         }
@@ -300,7 +228,7 @@ namespace LOE_Overhaul
                     tmr.Stop();
                     tmr = null;
 
-                    displayModInfo(label.Text, false);
+                    displayModInfo(label.Text, false, label);
                 }
             }
         }
@@ -310,7 +238,7 @@ namespace LOE_Overhaul
             System.Windows.Forms.Label lbl = (System.Windows.Forms.Label)sender;
             if (lbl.Text != "")
             {
-                if (lbl.Name.ToLower() != "open_sidebar")
+                if (lbl.Name.ToLower() != "fontsize")
                 {
                     string result = lbl.Text.Remove(0, 2);
                     result = Regex.Replace(result, @"^\d+", "").Trim();
@@ -337,12 +265,7 @@ namespace LOE_Overhaul
             }
         }
 
-        private void startMoving()
-        {
-            // to be continued
-        }
-
-        private void displayModInfo(string modText, bool manual)
+        private void displayModInfo(string modText, bool manual, Label originLbl)
         {
             if (!manual)
             {
@@ -412,11 +335,14 @@ namespace LOE_Overhaul
                                     break;
                             }
 
-                            textModName.Text = pkgModName;
-                            textModVersion.Text = pkgModVersion;
-                            textModAuthor.Text = pkgModAuthor;
-                            textModAkiVersion.Text = pkgModAkiVersion;
-                            textModHasConfig.Text = pkgModConfig;
+                            string compiled = $"Name: {pkgModName}" + Environment.NewLine +
+                                              $"Version: {pkgModVersion}" + Environment.NewLine +
+                                              $"Creator: {pkgModAuthor}" + Environment.NewLine +
+                                              $"SPT Version: {pkgModAkiVersion}" + Environment.NewLine +
+                                              $"Config file: {pkgModConfig}";
+
+                            modInfo.ToolTipTitle = $"Mod info - {result}";
+                            modInfo.SetToolTip(originLbl, compiled);
                         }
                         catch (Exception err)
                         {
@@ -488,11 +414,13 @@ namespace LOE_Overhaul
                                 break;
                         }
 
+                        /*
                         textModName.Text = pkgModName;
                         textModVersion.Text = pkgModVersion;
                         textModAuthor.Text = pkgModAuthor;
                         textModAkiVersion.Text = pkgModAkiVersion;
                         textModHasConfig.Text = pkgModConfig;
+                        */
                     }
                     catch (Exception err)
                     {
@@ -602,15 +530,6 @@ namespace LOE_Overhaul
             refreshUI();
         }
 
-        private void clearInfoPages()
-        {
-            textModName.Clear();
-            textModVersion.Clear();
-            textModAuthor.Clear();
-            textModHasConfig.Clear();
-            textModAkiVersion.Clear();
-        }
-
         private void clearUI()
         {
             for (int i = mainList.Controls.Count - 1; i >= 0; i--)
@@ -640,7 +559,6 @@ namespace LOE_Overhaul
             {
                 checkForRedundantMods();
                 checkForNewMods();
-                clearInfoPages();
 
                 try
                 {
@@ -683,6 +601,7 @@ namespace LOE_Overhaul
                     if (matchedNumber.Success)
                     {
                         string result = Regex.Replace(modText, @"^\d+", "").Trim();
+                        Label convertedLbl = component as Label;
 
                         if (result.ToLower() == itemName.ToLower())
                         {
@@ -691,8 +610,8 @@ namespace LOE_Overhaul
                             component.ForeColor = Color.DodgerBlue;
                             component.Padding = new Padding(15, 0, 0, 0);
 
-                            clearInfoPages();
-                            displayModInfo(itemName, true);
+                            displayModInfo(itemName, true, convertedLbl);
+                            component.Select();
                         }
                     }
                 }
@@ -869,6 +788,7 @@ namespace LOE_Overhaul
             }
             else if (e.KeyCode == Keys.Up || e.KeyCode == Keys.W)
             {
+                e.Handled = true;
                 foreach (Control component in mainList.Controls)
                 {
                     if (component is Label label && component.ForeColor == Color.DodgerBlue)
@@ -886,6 +806,7 @@ namespace LOE_Overhaul
             }
             else if (e.KeyCode == Keys.Down || e.KeyCode == Keys.S)
             {
+                e.Handled = true;
                 foreach (Control component in mainList.Controls)
                 {
                     if (component is Label label && component.ForeColor == Color.DodgerBlue)
@@ -916,12 +837,9 @@ namespace LOE_Overhaul
                         string result = Regex.Replace(label.Text, @"^\d+", "").Trim();
                         moveItemUp(result);
                     }
-
                     break;
                 }
             }
-
-            uselessFunction();
         }
 
         private void btnDown_Click(object sender, EventArgs e)
@@ -937,38 +855,19 @@ namespace LOE_Overhaul
                         string result = Regex.Replace(label.Text, @"^\d+", "").Trim();
                         moveItemDown(result);
                     }
-
                     break;
                 }
             }
-
-            uselessFunction();
         }
 
         private void mainList_DragDrop(object sender, DragEventArgs e)
         {
-            if (draggedLabel != null)
-            {
-                Point newLoc = mainList.PointToClient(new Point(e.X, e.Y));
-                int index = GetInsertionIndex(newLoc);
-
-            }
-        }
-
-        private int GetInsertionIndex(Point loc)
-        {
-
-            return 0;
-        }
-
-        private void moveItemToIndex(Label label, int index)
-        {
-            mainList.Controls.SetChildIndex(label, index);
+            //
         }
 
         private void uselessFunction()
         {
-            titleModName.Select();
+            placeholder.Select();
         }
     }
 }
