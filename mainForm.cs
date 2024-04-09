@@ -581,8 +581,16 @@ namespace LOE_Overhaul
 
         private void generateOrderFile()
         {
-            string[] orderArray = Directory.GetDirectories(currentEnv).ToArray();
-            JArray loadOrder = JArray.FromObject(orderArray);
+            string[] allModFolders = Directory.GetDirectories(currentEnv);
+            List<string> allTrimmedFolders = new List<string>();
+
+            foreach (string modFolder in allModFolders)
+            {
+                string trimmedFolder = Path.GetFileName(modFolder);
+                allTrimmedFolders.Add(trimmedFolder);
+            }
+
+            JArray loadOrder = JArray.FromObject(allTrimmedFolders);
 
             JObject fullObject = new JObject
             {
@@ -590,7 +598,6 @@ namespace LOE_Overhaul
             };
 
             string newJSON = fullObject.ToString();
-
             File.WriteAllText(orderFile, newJSON);
             refreshUI();
         }
