@@ -174,7 +174,7 @@ namespace LOE_Overhaul
                 else if (label.BackColor == selectColor)
                     label.BackColor = selectColor;
 
-                displayModInfo(label.Text, true, label);
+                displayModInfo(label.Text, label);
             }
         }
 
@@ -223,13 +223,6 @@ namespace LOE_Overhaul
             System.Windows.Forms.Label label = (System.Windows.Forms.Label)sender;
             if (label.Text != "")
             {
-                if (tmr != null && tmr.Enabled)
-                {
-                    tmr.Stop();
-                    tmr = null;
-
-                    displayModInfo(label.Text, false, label);
-                }
             }
         }
 
@@ -265,167 +258,81 @@ namespace LOE_Overhaul
             }
         }
 
-        private void displayModInfo(string modText, bool manual, Label originLbl)
+        private void displayModInfo(string modText, Label originLbl)
         {
-            if (!manual)
+            string modFolder = Path.Combine(currentEnv, modText);
+            string packageJsonFile = Path.Combine(modFolder, "package.json");
+
+            bool packageJsonFileExists = File.Exists(packageJsonFile);
+            if (packageJsonFileExists)
             {
-                Match matchedNumber = Regex.Match(modText, @"^\d+");
-                if (matchedNumber.Success)
+                try
                 {
-                    string result = Regex.Replace(modText, @"^\d+", "").Trim();
-                    string modFolder = Path.Combine(currentEnv, result);
-                    string modFolderName = Path.GetFileName(modFolder);
-                    string packageJsonFile = Path.Combine(modFolder, "package.json");
+                    int iterated = 0;
+                    string packageContent = File.ReadAllText(packageJsonFile);
+                    JObject pkgObject = JObject.Parse(packageContent);
 
-                    bool packageJsonFileExists = File.Exists(packageJsonFile);
-                    if (packageJsonFileExists)
+                    string pkgModName = pkgObject.Value<string>("name");
+                    string pkgModVersion = pkgObject.Value<string>("version");
+                    string pkgModAuthor = pkgObject.Value<string>("author");
+                    string pkgModAkiVersion = pkgObject.Value<string>("akiVersion").ToUpper();
+                    string? pkgModConfig = null;
+
+                    string? modConfigFolder = Path.Combine(modFolder, "config");
+                    string? modConfigFile1 = Path.Combine(modFolder, "config.json");
+                    string? modConfigFile2 = Path.Combine(modConfigFolder, "config.json");
+
+                    bool configExists = Directory.Exists(modConfigFolder);
+                    if (configExists)
                     {
-                        try
+                        iterated++;
+                        iterated++;
+
+                        bool modConfig2Exists = File.Exists(modConfigFile2);
+
+                        if (modConfig2Exists)
                         {
-                            int iterated = 0;
-                            string packageContent = File.ReadAllText(packageJsonFile);
-                            JObject pkgObject = JObject.Parse(packageContent);
-
-                            string pkgModName = pkgObject.Value<string>("name");
-                            string pkgModVersion = pkgObject.Value<string>("version");
-                            string pkgModAuthor = pkgObject.Value<string>("author");
-                            string pkgModAkiVersion = pkgObject.Value<string>("akiVersion").ToUpper();
-                            string? pkgModConfig = null;
-
-                            string? modConfigFolder = Path.Combine(modFolder, "config");
-                            string? modConfigFile1 = Path.Combine(modFolder, "config.json");
-                            string? modConfigFile2 = Path.Combine(modConfigFolder, "config.json");
-
-                            bool configExists = Directory.Exists(modConfigFolder);
-                            if (configExists)
-                            {
-                                iterated++;
-                                iterated++;
-
-                                bool modConfig2Exists = File.Exists(modConfigFile2);
-
-                                if (modConfig2Exists)
-                                {
-                                    iterated++;
-                                    iterated++;
-                                }
-                            }
-                            else
-                            {
-                                bool modConfigExists = File.Exists(modConfigFile1);
-                                if (modConfigExists)
-                                {
-                                    iterated++;
-                                }
-                            }
-
-                            switch (iterated)
-                            {
-                                case 0:
-                                    pkgModConfig = $"None available";
-                                    break;
-                                case 1:
-                                    pkgModConfig = $"{modFolderName}/config.json";
-                                    break;
-                                case 2:
-                                    pkgModConfig = $"Nested";
-                                    break;
-                                case 4:
-                                    pkgModConfig = $"config/config.json";
-                                    break;
-                            }
-
-                            string compiled = $"Name: {pkgModName}" + Environment.NewLine +
-                                              $"Version: {pkgModVersion}" + Environment.NewLine +
-                                              $"Creator: {pkgModAuthor}" + Environment.NewLine +
-                                              $"SPT Version: {pkgModAkiVersion}" + Environment.NewLine +
-                                              $"Config file: {pkgModConfig}";
-
-                            modInfo.ToolTipTitle = $"Mod info - {result}";
-                            modInfo.SetToolTip(originLbl, compiled);
-                        }
-                        catch (Exception err)
-                        {
-                            displayMessage(err.Message.ToString(), true);
+                            iterated++;
+                            iterated++;
                         }
                     }
+                    else
+                    {
+                        bool modConfigExists = File.Exists(modConfigFile1);
+                        if (modConfigExists)
+                        {
+                            iterated++;
+                        }
+                    }
+
+                    switch (iterated)
+                    {
+                        case 0:
+                            pkgModConfig = $"None available";
+                            break;
+                        case 1:
+                            pkgModConfig = $"{modText}/config.json";
+                            break;
+                        case 2:
+                            pkgModConfig = $"Nested";
+                            break;
+                        case 4:
+                            pkgModConfig = $"config/config.json";
+                            break;
+                    }
+
+                    string compiled = $"Name: {pkgModName}" + Environment.NewLine +
+                                          $"Version: {pkgModVersion}" + Environment.NewLine +
+                                          $"Creator: {pkgModAuthor}" + Environment.NewLine +
+                                          $"SPT Version: {pkgModAkiVersion}" + Environment.NewLine +
+                                          $"Config file: {pkgModConfig}";
+
+                    modInfo.ToolTipTitle = $"Mod info - {modText}";
+                    modInfo.SetToolTip(originLbl, compiled);
                 }
-            }
-            else
-            {
-                string modFolder = Path.Combine(currentEnv, modText);
-                string packageJsonFile = Path.Combine(modFolder, "package.json");
-
-                bool packageJsonFileExists = File.Exists(packageJsonFile);
-                if (packageJsonFileExists)
+                catch (Exception err)
                 {
-                    try
-                    {
-                        int iterated = 0;
-                        string packageContent = File.ReadAllText(packageJsonFile);
-                        JObject pkgObject = JObject.Parse(packageContent);
-
-                        string pkgModName = pkgObject.Value<string>("name");
-                        string pkgModVersion = pkgObject.Value<string>("version");
-                        string pkgModAuthor = pkgObject.Value<string>("author");
-                        string pkgModAkiVersion = pkgObject.Value<string>("akiVersion").ToUpper();
-                        string? pkgModConfig = null;
-
-                        string? modConfigFolder = Path.Combine(modFolder, "config");
-                        string? modConfigFile1 = Path.Combine(modFolder, "config.json");
-                        string? modConfigFile2 = Path.Combine(modConfigFolder, "config.json");
-
-                        bool configExists = Directory.Exists(modConfigFolder);
-                        if (configExists)
-                        {
-                            iterated++;
-                            iterated++;
-
-                            bool modConfig2Exists = File.Exists(modConfigFile2);
-
-                            if (modConfig2Exists)
-                            {
-                                iterated++;
-                                iterated++;
-                            }
-                        }
-                        else
-                        {
-                            bool modConfigExists = File.Exists(modConfigFile1);
-                            if (modConfigExists)
-                            {
-                                iterated++;
-                            }
-                        }
-
-                        switch (iterated)
-                        {
-                            case 0:
-                                pkgModConfig = $"None available";
-                                break;
-                            case 1:
-                                pkgModConfig = $"{modText}/config.json";
-                                break;
-                            case 2:
-                                pkgModConfig = $"Nested";
-                                break;
-                            case 4:
-                                pkgModConfig = $"config/config.json";
-                                break;
-                        }
-
-                        /*
-                        textModName.Text = pkgModName;
-                        textModVersion.Text = pkgModVersion;
-                        textModAuthor.Text = pkgModAuthor;
-                        textModAkiVersion.Text = pkgModAkiVersion;
-                        textModHasConfig.Text = pkgModConfig;
-                        */
-                    }
-                    catch (Exception err)
-                    {
-                        displayMessage(err.Message.ToString(), true);
-                    }
+                    displayMessage(err.Message.ToString(), true);
                 }
             }
         }
@@ -610,7 +517,7 @@ namespace LOE_Overhaul
                             component.ForeColor = Color.DodgerBlue;
                             component.Padding = new Padding(15, 0, 0, 0);
 
-                            displayModInfo(itemName, true, convertedLbl);
+                            displayModInfo(itemName, convertedLbl);
                             component.Select();
                         }
                     }
