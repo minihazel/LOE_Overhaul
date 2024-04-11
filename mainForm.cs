@@ -7,8 +7,7 @@ namespace LOE_Overhaul
 {
     public partial class mainForm : Form
     {
-        // public string? currentEnv = Path.GetDirectoryName(Application.ExecutablePath);
-        public string? currentEnv = Path.Combine("C:\\SPT-AKI 3.8.0", "user", "mods");
+        public string? currentEnv = Path.GetDirectoryName(Application.ExecutablePath);
         public string? cacheFolder;
         public string? serverFolder;
         public string? orderFile;
