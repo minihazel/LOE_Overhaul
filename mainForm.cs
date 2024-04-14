@@ -70,6 +70,7 @@ namespace LOE_Overhaul
         private void mainForm_Load(object sender, EventArgs e)
         {
             serverFolder = Directory.GetParent(Directory.GetParent(currentEnv).FullName).FullName;
+            Size = new Size(Properties.Settings.Default.sizeWidth, Properties.Settings.Default.sizeHeight);
 
             orderFile = Path.Combine(currentEnv, "order.json");
             cacheFolder = Path.Combine(serverFolder, "user", "cache");
@@ -774,6 +775,14 @@ namespace LOE_Overhaul
         private void uselessFunction()
         {
             placeholder.Select();
+        }
+
+        private void mainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.sizeWidth = this.Size.Width;
+            Properties.Settings.Default.sizeHeight = this.Size.Height;
+
+            Properties.Settings.Default.Save();
         }
     }
 }

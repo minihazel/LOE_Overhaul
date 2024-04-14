@@ -188,6 +188,7 @@
             Name = "mainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Load Order Editor - Revamped";
+            FormClosing += mainForm_FormClosing;
             Load += mainForm_Load;
             KeyDown += mainForm_KeyDown;
             mainList.ResumeLayout(false);
