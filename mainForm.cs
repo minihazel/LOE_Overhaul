@@ -173,7 +173,7 @@ namespace LOE_Overhaul
                 else if (label.BackColor == selectColor)
                     label.BackColor = selectColor;
 
-                displayModInfo(label.Text, label);
+                // displayModInfo(label.Text, label);
             }
         }
 
@@ -326,8 +326,8 @@ namespace LOE_Overhaul
                                           $"SPT Version: {pkgModAkiVersion}" + Environment.NewLine +
                                           $"Config file: {pkgModConfig}";
 
-                    modInfo.ToolTipTitle = $"Mod info - {modText}";
-                    modInfo.SetToolTip(originLbl, compiled);
+                    // modInfo.ToolTipTitle = $"Mod info - {modText}";
+                    // modInfo.SetToolTip(originLbl, compiled);
                 }
                 catch (Exception err)
                 {

@@ -52,7 +52,7 @@
             mainList.Location = new Point(0, 0);
             mainList.Margin = new Padding(4, 3, 4, 3);
             mainList.Name = "mainList";
-            mainList.Size = new Size(575, 450);
+            mainList.Size = new Size(575, 448);
             mainList.TabIndex = 1;
             mainList.DragDrop += mainList_DragDrop;
             // 
@@ -109,7 +109,7 @@
             btnDown.FlatAppearance.BorderColor = SystemColors.WindowFrame;
             btnDown.FlatStyle = FlatStyle.Flat;
             btnDown.Font = new Font("Bahnschrift Light", 20F);
-            btnDown.Location = new Point(493, 12);
+            btnDown.Location = new Point(402, 12);
             btnDown.Name = "btnDown";
             btnDown.Padding = new Padding(3, 0, 0, 6);
             btnDown.Size = new Size(70, 45);
@@ -125,7 +125,7 @@
             btnUp.FlatAppearance.BorderColor = SystemColors.WindowFrame;
             btnUp.FlatStyle = FlatStyle.Flat;
             btnUp.Font = new Font("Bahnschrift Light", 20F);
-            btnUp.Location = new Point(402, 12);
+            btnUp.Location = new Point(311, 12);
             btnUp.Name = "btnUp";
             btnUp.Padding = new Padding(3, 0, 0, 6);
             btnUp.Size = new Size(70, 45);
@@ -143,9 +143,9 @@
             panel1.Controls.Add(placeholder);
             panel1.Controls.Add(btnDown);
             panel1.Controls.Add(btnUp);
-            panel1.Location = new Point(0, 450);
+            panel1.Location = new Point(0, 448);
             panel1.Name = "panel1";
-            panel1.Size = new Size(575, 69);
+            panel1.Size = new Size(484, 69);
             panel1.TabIndex = 12;
             // 
             // placeholder
@@ -175,7 +175,7 @@
             AutoScaleDimensions = new SizeF(9F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(24, 26, 28);
-            ClientSize = new Size(575, 519);
+            ClientSize = new Size(484, 519);
             Controls.Add(panel1);
             Controls.Add(mainList);
             Font = new Font("Bender", 12F);
@@ -184,6 +184,7 @@
             KeyPreview = true;
             Margin = new Padding(4, 3, 4, 3);
             MaximizeBox = false;
+            MinimumSize = new Size(500, 300);
             Name = "mainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Load Order Editor - Revamped";
