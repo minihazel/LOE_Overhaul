@@ -60,7 +60,7 @@
             // 
             modOrder0.AutoEllipsis = true;
             modOrder0.Cursor = Cursors.Hand;
-            modOrder0.Font = new Font("Bahnschrift Light", 12F);
+            modOrder0.Font = new Font("Bahnschrift SemiBold", 12F);
             modOrder0.Location = new Point(1, 1);
             modOrder0.Name = "modOrder0";
             modOrder0.Padding = new Padding(10, 0, 0, 0);

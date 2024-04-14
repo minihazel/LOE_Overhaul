@@ -7,8 +7,7 @@ namespace LOE_Overhaul
 {
     public partial class mainForm : Form
     {
-        // public string? currentEnv = Path.GetDirectoryName(Application.ExecutablePath);
-        public string? currentEnv = Path.Combine("C:\\SPT-AKI 3.8.0", "user", "mods");
+        public string? currentEnv = Path.GetDirectoryName(Application.ExecutablePath);
         public string? cacheFolder;
         public string? serverFolder;
         public string? orderFile;
@@ -142,7 +141,7 @@ namespace LOE_Overhaul
                     lbl.TextAlign = modOrder0.TextAlign;
                     lbl.Size = new Size(mainList.Size.Width, modOrder0.Size.Height);
                     lbl.Location = new Point(1, 10 /* + modOrder0.Size.Height */ + (i * modOrder0.Size.Height));
-                    lbl.Font = new Font("Bahnschrift Light", modOrder0.Font.Size, FontStyle.Regular);
+                    lbl.Font = new Font(modOrder0.Font.FontFamily, modOrder0.Font.Size, FontStyle.Regular);
                     lbl.BackColor = idleColor;
                     lbl.ForeColor = Color.LightGray;
                     lbl.Padding = new Padding(10, 0, 0, 0);
