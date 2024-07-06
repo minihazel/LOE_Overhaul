@@ -97,7 +97,7 @@ namespace LOE_Overhaul
             }
             else
             {
-                if (MessageBox.Show($"We could not detect the Server folder (where Aki.Server.exe is).\n\nPlease put 'Load Order Editor.exe' into your user\\mods folder and try again!",
+                if (MessageBox.Show($"We could not detect the Server folder (where SPT.Server.exe is).\n\nPlease put 'Load Order Editor.exe' into your user\\mods folder and try again!",
                     this.Text, MessageBoxButtons.OK) == DialogResult.OK)
                 {
                     Application.Exit();
@@ -275,7 +275,7 @@ namespace LOE_Overhaul
                     string pkgModName = pkgObject.Value<string>("name");
                     string pkgModVersion = pkgObject.Value<string>("version");
                     string pkgModAuthor = pkgObject.Value<string>("author");
-                    string pkgModAkiVersion = pkgObject.Value<string>("akiVersion").ToUpper();
+                    string pkgModSPTVersion = pkgObject.Value<string>("sptVersion").ToUpper();
                     string? pkgModConfig = null;
 
                     string? modConfigFolder = Path.Combine(modFolder, "config");
@@ -324,7 +324,7 @@ namespace LOE_Overhaul
                     string compiled = $"Name: {pkgModName}" + Environment.NewLine +
                                           $"Version: {pkgModVersion}" + Environment.NewLine +
                                           $"Creator: {pkgModAuthor}" + Environment.NewLine +
-                                          $"SPT Version: {pkgModAkiVersion}" + Environment.NewLine +
+                                          $"SPT Version: {pkgModSPTVersion}" + Environment.NewLine +
                                           $"Config file: {pkgModConfig}";
 
                     // modInfo.ToolTipTitle = $"Mod info - {modText}";
@@ -628,7 +628,7 @@ namespace LOE_Overhaul
 
         private void joinLink_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Would you like to join the SPT-AKI Discord server?" + Environment.NewLine + Environment.NewLine +
+            if (MessageBox.Show("Would you like to join the SPT Discord server?" + Environment.NewLine + Environment.NewLine +
                                 "This will open a new window", this.Text, MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 try
