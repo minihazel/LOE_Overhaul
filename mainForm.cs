@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 
 namespace LOE_Overhaul
@@ -275,7 +276,17 @@ namespace LOE_Overhaul
                     string pkgModName = pkgObject.Value<string>("name");
                     string pkgModVersion = pkgObject.Value<string>("version");
                     string pkgModAuthor = pkgObject.Value<string>("author");
-                    string pkgModSPTVersion = pkgObject.Value<string>("sptVersion").ToUpper();
+                    string pkgModSptVersion = "";
+
+                    if (pkgObject.TryGetValue("sptVersion", StringComparison.OrdinalIgnoreCase, out JToken sptVersionToken))
+                    {
+                        pkgModSptVersion = sptVersionToken.Value<string>();
+                    }
+                    else
+                    {
+                        pkgModSptVersion = "Could not be fetched";
+                    }
+
                     string? pkgModConfig = null;
 
                     string? modConfigFolder = Path.Combine(modFolder, "config");
@@ -324,7 +335,7 @@ namespace LOE_Overhaul
                     string compiled = $"Name: {pkgModName}" + Environment.NewLine +
                                           $"Version: {pkgModVersion}" + Environment.NewLine +
                                           $"Creator: {pkgModAuthor}" + Environment.NewLine +
-                                          $"SPT Version: {pkgModSPTVersion}" + Environment.NewLine +
+                                          $"SPT Version: {pkgModSptVersion}" + Environment.NewLine +
                                           $"Config file: {pkgModConfig}";
 
                     // modInfo.ToolTipTitle = $"Mod info - {modText}";
